@@ -7,6 +7,17 @@ This application serves an Automatic Speech Recognition (ASR) model using NVIDIA
 - A 5–10 second, 16kHz mono WAV audio file for testing
 - Optional: GPU for faster inference (CPU works but is slower)
 
+## Fastapi demo
+
+https://github.com/user-attachments/assets/fba9a3bb-8a4d-4f57-bf69-940548a294ad
+
+
+## Streamlit demo
+
+https://github.com/user-attachments/assets/6e80ba57-0e6f-40c7-8aaa-39a148157c8f
+
+
+
 ## Build and Run
 1. **Clone the Repository**:
    ```bash
