@@ -20,16 +20,28 @@ if uploaded_files:
                 response = requests.post("http://localhost:8000/transcribe", files=files)
                 response.raise_for_status()
                 results = response.json()
-                for result in results:
-                    st.write(f"**File**: {result['filename']}")
-                    st.success(f"Transcription: {result['transcription']}")
-                    # st.write(f"Confidence: {result['confidence']:.2%}")
-                    st.download_button(
-                        label=f"Download {result['filename']} Transcription",
-                        data=result['transcription'],
-                        file_name=f"{result['filename']}_transcription.txt",
-                        mime="text/plain",
-                    )
+                st.write(f"Debug: type of results: {type(results)}")
+                st.write(f"Debug: results content: {results}")
+                if isinstance(results, list):
+                    for result in results:
+                        st.success(f"Transcription: {results}")
+                        st.download_button(
+                            label=f"Download Transcription",
+                            data=results,
+                            file_name=f"transcription.txt",
+                            mime="text/plain",
+                        )
+                elif isinstance(results, dict):
+                    # Handle single result dict
+                    st.success(f"Transcription: {results.get('transcriptions', '')}")
+                    # st.download_button(
+                    #     label=f"Download Transcription",
+                    #     data=results.get('transcriptions', ''),
+                    #     file_name=f"transcription.txt",
+                    #     mime="text/plain",
+                    # )
+                else:
+                    st.error(f"Unexpected response format: {results}")
             except requests.exceptions.RequestException as e:
                 st.error(f"Error: {str(e)}")
 
